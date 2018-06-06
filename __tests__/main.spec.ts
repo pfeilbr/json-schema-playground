@@ -1,15 +1,15 @@
-const AJV = require('ajv')
+const AJV = require('ajv');
 
-const ajv = new AJV({ schemaId: 'auto', allErrors: true })
-ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'))
+const ajv = new AJV({ schemaId: 'auto', allErrors: true });
+ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'));
 
 const valid = (schema: any, data: any) => {
-  const validate = ajv.compile(schema)
-  const isValid = validate(data)
+  const validate = ajv.compile(schema);
+  const isValid = validate(data);
   if (!isValid) {
-    console.error(`Invalid: ${ajv.errorsText(validate.errors)}`)
+    console.error(`Invalid: ${ajv.errorsText(validate.errors)}`);
   }
-  return isValid
+  return isValid;
 };
 
 describe('schema validation', () => {
@@ -42,15 +42,15 @@ describe('schema validation', () => {
         },
       },
       required: ['id', 'name', 'price'],
-    }
+    };
 
     const data = {
       id: 1,
       name: 'A green door',
       price: 12.5,
       tags: ['home', 'green'],
-    }
+    };
 
-    expect(valid(schema, data)).toBe(true)
-  })
-})
+    expect(valid(schema, data)).toBe(true);
+  });
+});
